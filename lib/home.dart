@@ -1,11 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'record.dart';
-import 'storyTab.dart';
 import 'package:share/share.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class HomePage extends StatefulWidget {
+  const HomePage({
+    Key key,
+    @required this.user
+}) : super(key: key);
+
+  final FirebaseUser user;
+
+
 @override
   State<HomePage> createState() => HomePageState();
 }

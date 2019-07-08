@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'home.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,12 +11,12 @@ class StoryApp extends StatelessWidget {
     return MaterialApp(
       title: 'Story',
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
-      home: HomePage(),
+      home: LoginPage(),
       // TODO: Make currentCategory field take _currentCategory (104)
       // TODO: Pass _currentCategory for frontLayer (104)
       // TODO: Change backLayer field value to CategoryMenuPage (104)
-      initialRoute: '/login',
-      onGenerateRoute: _getRoute,
+//      initialRoute: '/login',
+//      onGenerateRoute: _getRoute,
       // TODO: Add a theme (103)
     );
   }

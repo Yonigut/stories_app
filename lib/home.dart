@@ -4,6 +4,15 @@ import 'record.dart';
 import 'package:share/share.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+class HomeRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -53,8 +62,10 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
-      home: Scaffold(
+    return
+//      MaterialApp(
+//      home:
+      Scaffold(
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
@@ -87,7 +98,7 @@ class HomePageState extends State<HomePage> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-      ),
+//      ),
     );
 //        bottomNavigationBar: BottomAppBar(
 //          child: new Row(

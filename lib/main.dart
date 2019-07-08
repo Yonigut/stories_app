@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'home.dart';
 
 void main() => runApp(StoryApp());
 
@@ -22,13 +23,13 @@ class StoryApp extends StatelessWidget {
   }
 
   Route<dynamic> _getRoute(RouteSettings settings) {
-    if (settings.name != '/login') {
+    if (settings.name != '/home') {
       return null;
     }
 
     return MaterialPageRoute<void>(
       settings: settings,
-      builder: (BuildContext context) => LoginPage(),
+      builder: (BuildContext context) => HomePage(),
       fullscreenDialog: true,
     );
   }

@@ -17,7 +17,8 @@ class HomeRoute extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({
     Key key,
-    @required this.user
+//    @required
+    this.user
 }) : super(key: key);
 
   final FirebaseUser user;
@@ -56,8 +57,17 @@ class HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+    printUserInfo();
   }
 
+  Future<void>  printUserInfo() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    if (user == null) {
+      print('Not signed in');
+    } else {
+      print('Signed in');
+    }
+}
 
   @override
   Widget build(BuildContext context) {

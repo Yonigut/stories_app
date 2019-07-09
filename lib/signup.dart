@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home.dart';
+import 'login.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -147,9 +148,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 color: Colors.white,
                 height: 20,
               ),
-              ButtonBar(
-                alignment: MainAxisAlignment.center,
-                children: <Widget>[
+//              ButtonBar(
+//                alignment: MainAxisAlignment.center,
+//                children: <Widget>[
                   OutlineButton(
                       onPressed: () {
                         _passwordController.clear();
@@ -177,9 +178,34 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontFamily: 'Times New Roman',
                             fontSize: 16),
                       )),
+                  Container(
+                    color: Colors.white,
+                    height: 20,
+                  ),
+                  Text('Already have an account?',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Times New Roman',
+                        fontSize: 12),
+                  ),
+                  OutlineButton(
+                      onPressed: () {
+                        Navigator.pushReplacement( context,
+                          MaterialPageRoute(builder: (BuildContext context) => LoginPage(),),
+                        );
+                      },
+                      color: Colors.white,
+                      borderSide: BorderSide(color: Colors.black),
+                      child: Text(
+                        'Log-in',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Times New Roman',
+                            fontSize: 16),
+                      )),
                 ],
-              ),
-            ],
+//              ),
+//            ],
           ),
         ),
       ),

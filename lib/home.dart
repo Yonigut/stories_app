@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'record.dart';
 import 'package:share/share.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'user.dart';
 
-class HomeRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      home: HomePage(),
-    );
-  }
-}
+//class HomeRoute extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    return MaterialApp(
+//      home: HomePage(),
+//    );
+//  }
+//}
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -46,11 +47,15 @@ class HomePageState extends State<HomePage> {
     Text(
       'Saved Stories',
       style: optionStyle,
-    ),
+    ), Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
     Text(
       'User',
       style: optionStyle,
     ),
+      UserPage(),
+   ], ),
   ];
 
   void _onItemTapped(int index) {
@@ -71,7 +76,7 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    printUserInfo();
     return
 //      MaterialApp(
 //      home:

@@ -67,6 +67,7 @@ class HomePageState extends State<HomePage> {
 
   Future<void>  printUserInfo() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    print('user is ${user.uid.toString()}');
     if (user == null) {
       print('Not signed in');
     } else {

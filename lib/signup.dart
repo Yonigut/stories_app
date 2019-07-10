@@ -15,8 +15,20 @@ class _SignUpPageState extends State<SignUpPage> {
   String _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  Future<void>  printUserInfo() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    if (user == null) {
+      print('Not signed in');
+    } else {
+      print('Signed in');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    printUserInfo();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body:

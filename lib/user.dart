@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'signup.dart';
+import 'login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserPage extends StatelessWidget {
   FirebaseUser user;
@@ -21,11 +23,14 @@ class UserPage extends StatelessWidget {
               ),
             ),
             onPressed: () {
+              String username = user.displayName;
+              print('displayName is $username');
+              Firestore.instance.collection('users').document(username).delete();
               this.user.delete();
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => SignUpPage(),
+                  builder: (BuildContext context) => LoginPage(),
                 ),
               );
             },
@@ -45,7 +50,7 @@ class UserPage extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => SignUpPage(),
+            builder: (BuildContext context) => LoginPage(),
           ),
         );
       },

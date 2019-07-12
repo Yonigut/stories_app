@@ -73,6 +73,7 @@ class HomePageState extends State<HomePage> {
     } else {
       print('Signed in');
     }
+    print('with the account ${user.email}');
 }
 
   @override

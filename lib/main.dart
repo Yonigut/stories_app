@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'home.dart';
 import 'signup.dart';
+import 'main2.dart';
 
 void main() => runApp(StoryApp());
 
@@ -22,7 +23,7 @@ class StoryAppState extends State<StoryApp> {
       title: 'Story',
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
       home:
-          logInFetched ? (isLoggedIn ? HomePage() : SignUpPage()) : WhitePage(),
+          logInFetched ? (isLoggedIn ? HomePage() : LoginPage()) : WhitePage(),
       // TODO: Make currentCategory field take _currentCategory (104)
       // TODO: Pass _currentCategory for frontLayer (104)
       // TODO: Change backLayer field value to CategoryMenuPage (104)

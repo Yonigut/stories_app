@@ -81,6 +81,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: (input) {
                     if (input.isEmpty) {
                       return 'Please type a first name';
+                    } else if (input.length > 30) {
+                      return 'First names can contain at most thirty characters';
                     }
                   },
                   onSaved: (input) => _firstName = input,
@@ -114,6 +116,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: (input) {
                     if (input.isEmpty) {
                       return 'Please type an last name';
+                    } else if (input.length > 30) {
+                      return 'Last names can contain at most thirty characters';
                     }
                   },
                   onSaved: (input) => _lastName = input,
@@ -146,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: TextFormField(
                   validator: (input) {
                     if (input.length > 30) {
-                      return 'Please type a username with at most thirty characters';
+                      return 'Usernames can contain at most thirty characters';
                     } else if (!validateUsernameCharacters(input)) {
                       return 'The username can only contain lower case letters, numbers, periods and underscores';
                     }
@@ -184,8 +188,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: (input) {
                     if (!input.contains('@')) {
                       // TODO: ACTUALLY MAKE A BETTER CHECK FOR A VALID EMAIL
-                      return 'Please type an email';
+                      return 'Please type a valid email';
                     }
+
                   },
                   onSaved: (input) => _email = input,
                   autocorrect: false,
@@ -219,6 +224,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: (input) {
                     if (input.length < 6) {
                       return 'Your password needs to contain at least 6 characters';
+                    } else if (input.length > 30) {
+                      return 'Passwords can contain at most thirty characters';
+                    } else if (!validPasswordCharacters(input)) {
+                      return 'Passwords must contain at least one letter, number and other symbol';
                     }
                   },
                   onSaved: (input) => _password = input,
@@ -358,15 +367,53 @@ class _SignUpPageState extends State<SignUpPage> {
             .createUserWithEmailAndPassword(email: _email, password: _password);
         this.user = tempUser;
         addUser();
+        this.user.sendEmailVerification();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => HomePage(),
+            builder: (BuildContext context) => HomePage(user),
           ),
         );
       } catch (e) {
+        if (e == 'ERROR_EMAIL_ALREADY_IN_USE') {
+          print('caught');
+        }
+        print('not caught');
 //        print(e.message);
-        print(e.toString());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  content: Container(child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                          e.message,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: 'Times New Roman',
+                        ),
+                      ),
+                      OutlineButton(
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Times New Roman',
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                  ),
+              );
+            }
+        );
       }
     }
   }
@@ -382,6 +429,96 @@ class _SignUpPageState extends State<SignUpPage> {
 
     print(uui.displayName);
     print(user.displayName);
+  }
+
+  bool validPasswordCharacters(String input) {
+    bool hasNumber = false;
+    bool hasLetter = false;
+    bool hasSymbol = false;
+    for (int i = 0; i < input.length; i++) {
+      String currentLetter = input.substring(i, i + 1);
+      if (currentLetter == 'a' ||
+          currentLetter == 'b' ||
+          currentLetter == 'c' ||
+          currentLetter == 'd' ||
+          currentLetter == 'e' ||
+          currentLetter == 'f' ||
+          currentLetter == 'g' ||
+          currentLetter == 'h' ||
+          currentLetter == 'i' ||
+          currentLetter == 'j' ||
+          currentLetter == 'k' ||
+          currentLetter == 'l' ||
+          currentLetter == 'm' ||
+          currentLetter == 'n' ||
+          currentLetter == 'o' ||
+          currentLetter == 'p' ||
+          currentLetter == 'q' ||
+          currentLetter == 'r' ||
+          currentLetter == 's' ||
+          currentLetter == 't' ||
+          currentLetter == 'u' ||
+          currentLetter == 'v' ||
+          currentLetter == 'w' ||
+          currentLetter == 'x' ||
+          currentLetter == 'y' ||
+          currentLetter == 'z' ||
+          currentLetter == 'A' ||
+          currentLetter == 'B' ||
+          currentLetter == 'C' ||
+          currentLetter == 'D' ||
+          currentLetter == 'E' ||
+          currentLetter == 'F' ||
+          currentLetter == 'G' ||
+          currentLetter == 'H' ||
+          currentLetter == 'I' ||
+          currentLetter == 'J' ||
+          currentLetter == 'K' ||
+          currentLetter == 'L' ||
+          currentLetter == 'M' ||
+          currentLetter == 'N' ||
+          currentLetter == 'O' ||
+          currentLetter == 'P' ||
+          currentLetter == 'Q' ||
+          currentLetter == 'R' ||
+          currentLetter == 'S' ||
+          currentLetter == 'T' ||
+          currentLetter == 'U' ||
+          currentLetter == 'V' ||
+          currentLetter == 'W' ||
+          currentLetter == 'X' ||
+          currentLetter == 'Y' ||
+          currentLetter == 'Z') {
+        print('has letter');
+        hasLetter = true;
+      } else if (currentLetter == '0' ||
+          currentLetter == '1' ||
+          currentLetter == '2' ||
+          currentLetter == '3' ||
+          currentLetter == '4' ||
+          currentLetter == '5' ||
+          currentLetter == '6' ||
+          currentLetter == '7' ||
+          currentLetter == '8' ||
+          currentLetter == '9') {
+        hasNumber = true;
+        print('has number');
+      } else {
+        print('has symbol');
+        hasSymbol = true;
+      }
+      if (hasLetter && hasNumber && hasSymbol) {
+        print('so its true!');
+        return true;
+      }
+    }
+
+      print('has letter?: $hasLetter');
+      print('has number?: $hasNumber');
+      print('has symbol?: $hasSymbol');
+
+    print('its actuall false!');
+    return false;
   }
 
   bool validateUsernameCharacters(String input) {

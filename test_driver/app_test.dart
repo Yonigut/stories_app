@@ -15,6 +15,7 @@ void main() {
     final userPageFinder = find.byValueKey('user page');
     final deleteAccountFinder = find.byValueKey('delete account button');
     final signOutFinder = find.byValueKey('sign out button');
+    final logInFinder = find.byValueKey('log-in');
 
     FlutterDriver driver;
 
@@ -38,24 +39,68 @@ void main() {
       await driver.enterText('Yoniguten1!');
       await driver.tap(buttonFinder);
       await driver.waitFor(homeFinder);
-//      Health health = await driver.checkHealth();
-//      print(health.status);
     });
 
 
-    test('Sign-out', () async {
+    test('Sign-out & Log Back In Same Account', () async {
       await driver.tap(userIconFinder);
       await driver.waitFor(userPageFinder);
-      await driver.tap(deleteAccountFinder);
-      await.driver.
+      await driver.tap(signOutFinder);
+      await driver.waitFor(logInFinder);
+      await driver.tap(emailFinder);
+      await driver.enterText('yonigg98@gmail.com');
       await driver.waitFor(find.text('yonigg98@gmail.com'));
       await driver.tap(passwordFinder);
       await driver.enterText('Yoniguten1!');
       await driver.tap(buttonFinder);
       await driver.waitFor(homeFinder);
-//      Health health = await driver.checkHealth();
-//      print(health.status);
     });
+
+    test('Create New Account', () async {
+      await driver.tap(userIconFinder);
+      await driver.waitFor(userPageFinder);
+      await driver.tap(signOutFinder);
+      await driver.waitFor(logInFinder);
+      await driver.tap(emailFinder);
+      await driver.enterText('yonigg98@gmail.com');
+      await driver.waitFor(find.text('yonigg98@gmail.com'));
+      await driver.tap(passwordFinder);
+      await driver.enterText('Yoniguten1!');
+      await driver.tap(buttonFinder);
+      await driver.waitFor(homeFinder);
+    });
+
+    test('Delete Account', () async {
+      await driver.tap(userIconFinder);
+      await driver.waitFor(userPageFinder);
+      await driver.tap(signOutFinder);
+      await driver.waitFor(logInFinder);
+      await driver.tap(emailFinder);
+      await driver.enterText('yonigg98@gmail.com');
+      await driver.waitFor(find.text('yonigg98@gmail.com'));
+      await driver.tap(passwordFinder);
+      await driver.enterText('Yoniguten1!');
+      await driver.tap(buttonFinder);
+      await driver.waitFor(homeFinder);
+    });
+
+
+    // tap sign-up
+    // fill out first name
+    // fill out last name
+    // fill out username
+    // fill out email
+    // fill out password
+    // fill out confirm password
+    // tap sign up
+    // go into the app
+    // sign out and log-in with the same account
+
+
+    // delete the account and try to sign in again
+
+    // bad case with invalid credentials
+
 
 });
 }

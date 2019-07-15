@@ -14,16 +14,17 @@ class _LoginPageState extends State<LoginPage> {
   String _email;
   String _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _visible = false;
+  bool _visible = true;
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _visible = true;
-      });
-    });
+//    Future.delayed(const Duration(seconds: 2), () {
+//      setState(() {
+//        _visible = true;
+//      });
+//    });
     return Scaffold(
+      key: Key('log-in'),
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
@@ -60,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: new BoxDecoration(
                           border: new Border.all(color: Colors.black)),
                       child: TextFormField(
+                        key: Key('log-in email'),
                         validator: (input) {
                           if (!input.contains('@')) {
                             return 'Please type an email';
@@ -94,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: new BoxDecoration(
                           border: new Border.all(color: Colors.black)),
                       child: TextFormField(
+                        key: Key('log-in password'),
                         controller: _passwordController,
                         validator: (input) {
                           if (input.length < 6) {
@@ -142,6 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         OutlineButton(
+                          key: Key('log-in button'),
                           onPressed: () {
                             signIn();
                           },
@@ -216,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => HomePage(user: user),
+            builder: (BuildContext context) => HomePage(user),
           ),
         );
       } catch (e) {

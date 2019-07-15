@@ -396,6 +396,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       OutlineButton(
+                        focusColor: Colors.white,
+                        hoverColor: Colors.white,
+                        splashColor: Colors.white,
+                        highlightColor: Colors.white,
                         child: Text(
                           'Cancel',
                           style: TextStyle(

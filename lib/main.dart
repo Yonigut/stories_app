@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'home.dart';
 import 'signup.dart';
-import 'main2.dart';
 
 void main() => runApp(StoryApp());
 
@@ -16,6 +15,7 @@ class StoryApp extends StatefulWidget {
 class StoryAppState extends State<StoryApp> {
   bool logInFetched = false;
   bool isLoggedIn;
+  FirebaseUser user;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class StoryAppState extends State<StoryApp> {
       title: 'Story',
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
       home:
-          logInFetched ? (isLoggedIn ? HomePage() : LoginPage()) : WhitePage(),
+          logInFetched ? (isLoggedIn ? HomePage(user) : LoginPage()) : WhitePage(),
       // TODO: Make currentCategory field take _currentCategory (104)
       // TODO: Pass _currentCategory for frontLayer (104)
       // TODO: Change backLayer field value to CategoryMenuPage (104)
@@ -33,11 +33,16 @@ class StoryAppState extends State<StoryApp> {
     );
   }
 
-  Future<bool> checkIfLoggedIn() async {}
+  getUser() async {
+    this.user = await FirebaseAuth.instance.currentUser();
+  }
+
+//  Future<bool> checkIfLoggedIn() async {}
 
   @override
   void initState() {
     super.initState();
+    getUser();
     findIfLoggedIn();
   }
 
@@ -50,17 +55,17 @@ class StoryAppState extends State<StoryApp> {
   }
 }
 
-Route<dynamic> _getRoute(RouteSettings settings) {
-  if (settings.name != '/home') {
-    return null;
-  }
-
-  return MaterialPageRoute<void>(
-    settings: settings,
-    builder: (BuildContext context) => HomePage(),
-    fullscreenDialog: true,
-  );
-}
+//Route<dynamic> _getRoute(RouteSettings settings) {
+//  if (settings.name != '/home') {
+//    return null;
+//  }
+//
+//  return MaterialPageRoute<void>(
+//    settings: settings,
+//    builder: (BuildContext context) => HomePage(user),
+//    fullscreenDialog: true,
+//  );
+//}
 
 class WhitePage extends StatelessWidget {
   @override
@@ -72,4 +77,5 @@ class WhitePage extends StatelessWidget {
       ),
     );
   }
+
 }

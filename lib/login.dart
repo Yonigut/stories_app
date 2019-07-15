@@ -224,8 +224,45 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
       } catch (e) {
-        print(e.message);
-        print(e.toString());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: Colors.white,
+                content: Container(child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      e.message,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontFamily: 'Times New Roman',
+                      ),
+                    ),
+                    OutlineButton(
+                      focusColor: Colors.white,
+                      hoverColor: Colors.white,
+                      splashColor: Colors.white,
+                      highlightColor: Colors.white,
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontFamily: 'Times New Roman',
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+                ),
+              );
+            }
+        );
       }
     }
   }

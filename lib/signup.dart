@@ -384,6 +384,7 @@ class _SignUpPageState extends State<SignUpPage> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
+                backgroundColor: Colors.white,
                   content: Container(child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

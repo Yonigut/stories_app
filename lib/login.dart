@@ -14,52 +14,84 @@ class _LoginPageState extends State<LoginPage> {
   String _email;
   String _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _visible = true;
+  bool _visible = false;
 
   @override
   Widget build(BuildContext context) {
-//    Future.delayed(const Duration(seconds: 2), () {
-//      setState(() {
-//        _visible = true;
-//      });
-//    });
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _visible = true;
+      });
+    });
+    String font = 'Arapey';
     return Scaffold(
+//      backgroundColor: Color.fromRGBO(174, 198, 207, 100),
+      backgroundColor: Color.fromRGBO(130, 198, 240, 80),
       key: Key('log-in'),
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Container(
-          color: Colors.white,
+//          color: Color.fromRGBO(0, 35, 102, 100),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Blank',
-                  style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    color: Colors.black,
-                    fontSize: 100,
-                    fontFamily: 'Times New Roman',
-                  )),
-              Text('Original literature in 500 words or less.',
-                  style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontFamily: 'Times New Roman',
-                  )),
+//              RichText(
+//                textAlign: TextAlign.center,
+//            text: TextSpan(
+//              children: [
+//                TextSpan(text: 'Rose', style: TextStyle(fontFamily: font, fontSize: 180, color: Colors.white),),
+//                TextSpan(text: '(like prose, but shorter)', style: TextStyle(fontFamily: font, fontSize: 18, color: Colors.white),),
+//            ],
+//          ),
+//          ),
+              Text(
+                'Prose',
+                style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  color: Colors.black,
+                  fontSize: 110,
+                  fontFamily: font,
+                ),
+              ),
+              Text(
+                'Original literature in 500 words or less.',
+                style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontFamily: font,
+                ),
+              ),
+//                    Text('Rose',
+//                        style: TextStyle(
+//                          fontStyle: FontStyle.normal,
+//                          color: Colors.white,
+//                          fontSize: 130,
+//                          fontFamily: font,
+//                        )),
+//                    Text(
+//                      '(like prose, but shorter)',
+//                      style: TextStyle(
+//                        fontStyle: FontStyle.normal,
+//                        color: Colors.white,
+//                        fontSize: 18,
+//                        fontFamily: font,
+//                ),
+//              ),
               AnimatedOpacity(
                 opacity: _visible ? 1.0 : 0.0,
                 duration: Duration(seconds: 1),
                 child: Column(
                   children: [
                     Container(
-                      color: Colors.white,
+//                      color: Colors.white,
                       height: 80,
                     ),
                     Container(
                       width: 300,
-                      decoration: new BoxDecoration(
-                          border: new Border.all(color: Colors.black)),
+//                      decoration: new BoxDecoration(
+//                          border: new Border.all(color: Colors.black)),
                       child: TextFormField(
                         key: Key('log-in email'),
                         validator: (input) {
@@ -88,13 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Container(
-                      color: Colors.white,
+//                      color: Colors.white,
                       height: 20,
                     ),
                     Container(
                       width: 300,
-                      decoration: new BoxDecoration(
-                          border: new Border.all(color: Colors.black)),
                       child: TextFormField(
                         key: Key('log-in password'),
                         controller: _passwordController,
@@ -123,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Container(
-                      color: Colors.white,
+//                      color: Colors.white,
                       height: 10,
                     ),
                     ButtonBar(
@@ -135,6 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                             _emailController.clear();
                           },
                           color: Colors.white,
+                          splashColor: Colors.white,
+                          highlightColor: Colors.white,
+                          focusColor: Colors.white,
                           borderSide: BorderSide(color: Colors.black),
                           child: Text(
                             'Clear',
@@ -162,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     Container(
-                      color: Colors.white,
+//                      color: Colors.white,
                       height: 60,
                     ),
                     Column(
@@ -170,14 +203,15 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                        'Don\'t have an account?',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Times New Roman',
-                          fontSize: 14,
+                          'Don\'t have an account?',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Times New Roman',
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
                         FlatButton(
+                          key: Key('sign-up page button'),
                           child: Text(
                             'Sign-up',
                             style: TextStyle(
@@ -198,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           },
                         ),
-                        ],
+                      ],
                     ),
                   ],
                 ),
@@ -228,41 +262,42 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
+                key: Key('no account with this email'),
                 backgroundColor: Colors.white,
-                content: Container(child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      e.message,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontFamily: 'Times New Roman',
-                      ),
-                    ),
-                    OutlineButton(
-                      focusColor: Colors.white,
-                      hoverColor: Colors.white,
-                      splashColor: Colors.white,
-                      highlightColor: Colors.white,
-                      child: Text(
-                        'Cancel',
+                content: Container(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        e.message,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 12,
+                          fontSize: 18,
                           fontFamily: 'Times New Roman',
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
+                      OutlineButton(
+//                        focusColor: Colors.white,
+//                        hoverColor: Colors.white,
+//                        splashColor: Colors.white,
+//                        highlightColor: Colors.white,
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Times New Roman',
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               );
-            }
-        );
+            });
       }
     }
   }

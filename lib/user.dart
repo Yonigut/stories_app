@@ -1,68 +1,39 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'signup.dart';
-import 'login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-class UserPage extends StatelessWidget {
-  FirebaseUser user;
+class User {
+  String firstName;
+  String lastName;
+  String password;
+  String username;
+  String email;
+  String bio;
+  FirebaseUser fbUser;
+  List<dynamic> following;
+  List<dynamic> saved;
+  List<dynamic> wrote;
+  final ready = new ValueNotifier(false);
+  DocumentReference userReference;
+//  Function myCallBack;
 
-  @override
-  Widget build(BuildContext context) {
-    getUser();
-    return Column(
-      key: Key('user page'),
-      children: [
-        RaisedButton(
-          key: Key('delete account button'),
-          color: Colors.red,
-          child: Text(
-            'Delete Account',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Times New Roman',
-              fontSize: 22,
-            ),
-          ),
-          onPressed: () {
-            String username = user.displayName;
-            print('displayName is $username');
-            Firestore.instance.collection('users').document(username).delete();
-            this.user.delete();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => LoginPage(),
-              ),
-            );
-          },
-        ),
-        RaisedButton(
-          key: Key('sign out button'),
-          color: Colors.lightGreen,
-          child: Text(
-            'Sign Out',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Times New Roman',
-              fontSize: 22,
-            ),
-          ),
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => LoginPage(),
-              ),
-            );
-          },
-        ),
-      ],
-    );
+  User(Function myCallBack){
+    ready.addListener(myCallBack());
+    createUser();
   }
 
-  getUser() async {
-    this.user = await FirebaseAuth.instance.currentUser();
+  createUser() async {
+    this.fbUser = await FirebaseAuth.instance.currentUser();
+    this.username = fbUser.displayName;
+//    print(this.username);
+    DocumentReference userReference = await Firestore.instance.collection('users').document(username);
+    DocumentSnapshot data = await userReference.get();
+    this.firstName = data['firstName'];
+    this.bio = data['bio'];
+    this.lastName = data['lastName'];
+    this.email = data['email'];
+    this.password = data['password'];
+    ready.value = true;
   }
+
 }

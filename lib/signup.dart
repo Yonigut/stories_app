@@ -39,23 +39,23 @@ class _SignUpPageState extends State<SignUpPage> {
     printUserInfo();
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(130, 198, 240, 80),
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Container(
-          color: Colors.white,
+//          color: Color.fromRGBO(130, 198, 240, 80),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                color: Colors.white,
                 height: 50,
               ),
               Text(
-                'Blank',
+                'Story',
                 style: TextStyle(
                   fontStyle: FontStyle.normal,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 100,
                   fontFamily: 'Times New Roman',
                 ),
@@ -64,13 +64,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 'Original literature in 500 words or less.',
                 style: TextStyle(
                   fontStyle: FontStyle.normal,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'Times New Roman',
                 ),
               ),
               Container(
-                color: Colors.white,
                 height: 40,
               ),
               Container(
@@ -78,6 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: new BoxDecoration(
                     border: new Border.all(color: Colors.black)),
                 child: TextFormField(
+                  key: Key('sign-up first name'),
                   validator: (input) {
                     if (input.isEmpty) {
                       return 'Please type a first name';
@@ -105,7 +105,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Container(
-                color: Colors.white,
                 height: 20,
               ),
               Container(
@@ -113,6 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: new BoxDecoration(
                     border: new Border.all(color: Colors.black)),
                 child: TextFormField(
+                  key: Key('sign-up last name'),
                   validator: (input) {
                     if (input.isEmpty) {
                       return 'Please type an last name';
@@ -140,7 +140,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Container(
-                color: Colors.white,
                 height: 20,
               ),
               Container(
@@ -148,6 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: new BoxDecoration(
                     border: new Border.all(color: Colors.black)),
                 child: TextFormField(
+                  key: Key('sign-up username'),
                   validator: (input) {
                     if (input.length > 30) {
                       return 'Usernames can contain at most thirty characters';
@@ -177,7 +177,6 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
 
               Container(
-                color: Colors.white,
                 height: 20,
               ),
               Container(
@@ -185,6 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: new BoxDecoration(
                     border: new Border.all(color: Colors.black)),
                 child: TextFormField(
+                  key: Key('sign-up email'),
                   validator: (input) {
                     if (!input.contains('@')) {
                       // TODO: ACTUALLY MAKE A BETTER CHECK FOR A VALID EMAIL
@@ -212,7 +212,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Container(
-                color: Colors.white,
                 height: 20,
               ),
               Container(
@@ -220,6 +219,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: new BoxDecoration(
                     border: new Border.all(color: Colors.black)),
                 child: TextFormField(
+                  key: Key('sign-up password'),
                   controller: _passwordController,
                   validator: (input) {
                     if (input.length < 6) {
@@ -252,7 +252,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Container(
-                color: Colors.white,
                 height: 20,
               ),
               Container(
@@ -260,6 +259,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: new BoxDecoration(
                     border: new Border.all(color: Colors.black)),
                 child: TextFormField(
+                  key: Key('sign-up confirm password'),
                   controller: _confirmPasswordController,
                   validator: (input) {
                     if (input != _passwordController.text) {
@@ -288,6 +288,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 alignment: MainAxisAlignment.center,
                 children: [
                   OutlineButton(
+                    key: Key('sign-up button'),
                       onPressed: () {
                         signUp();
                       },
@@ -321,7 +322,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
               Container(
-                color: Colors.white,
                 height: 20,
               ),
               Column(

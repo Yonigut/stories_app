@@ -16,9 +16,12 @@ class StoryAppState extends State<StoryApp> {
   bool logInFetched = false;
   bool isLoggedIn;
   FirebaseUser user;
+  Widget homePage;
+  Widget logInPage;
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Story',
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
